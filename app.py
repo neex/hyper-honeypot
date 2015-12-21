@@ -41,13 +41,13 @@ def index():
 def check_otp():
     try:
         if not request.args.has_key('otp'):
-            return u'Нужен пароль'
+            return u'Нужен одноразовый пароль'
 
         if len(request.args.get('otp')) > 500:
-            return u'Пароль слишком длинный'
+            return u'Одноразовый пароль слишком длинный'
 
         if not request.args.has_key('sign'):
-            return u'Пароль не подписан'
+            return u'Одноразовый пароль не подписан'
 
         key = open("key.txt").read().strip()
         otp = request.args['otp']
@@ -56,13 +56,13 @@ def check_otp():
             return u'Подпись неверная'
 
         if OneTimePassword.query.filter_by(password=otp).first():
-            return u'Пароль уже использован'
+            return u'Одноразовый пароль уже использован'
 
         db.session.add(OneTimePassword(otp))
         db.session.commit()
         log_admin_request()
     except:
-        return u'Пароль или подпись некорректны'
+        return u'Одноразовый пароль или подпись некорректны'
 
 @app.route("/last_admin_requests/")
 def last_admin_requests():
