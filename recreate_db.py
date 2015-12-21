@@ -8,7 +8,7 @@ with app.app_context():
 import MySQLdb
 import traceback
 
-conn = MySQLdb.connect(user="root", db="honeypot")
+conn = MySQLdb.connect(user="honeypot", db="honeypot")
 cur = conn.cursor()
 try:
     cur.execute('drop table admin_requests;')

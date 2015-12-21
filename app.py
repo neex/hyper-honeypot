@@ -23,7 +23,7 @@ class OneTimePassword(db.Model):
         self.password = password
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqldb://root@localhost/honeypot?charset=utf8&use_unicode=0'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqldb://honeypot@localhost/honeypot?charset=utf8&use_unicode=0'
 app.debug = True
 db.init_app(app)
 
@@ -81,14 +81,14 @@ def viewexploit(id):
     return render_template("exploit.html", exploit=exploit)
 
 def log_admin_request():
-    conn = MySQLdb.connect(user="root", db="honeypot")
+    conn = MySQLdb.connect(user="honeypot", db="honeypot")
     query = 'insert into admin_requests (agent, uri) values ("{}", "{}");'.format(request.headers.get('User-Agent'), request.url)
     conn.cursor().execute(query, ())
     conn.commit()
     conn.close()
 
 def get_last_admin_requests():
-    conn = MySQLdb.connect(user="root", db="honeypot")
+    conn = MySQLdb.connect(user="honeypot", db="honeypot")
     cur = conn.cursor()
     cur.execute('select uri, agent from admin_requests order by id desc limit 10')
     requests = cur.fetchall()
