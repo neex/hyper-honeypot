@@ -7,7 +7,7 @@ from selenium.webdriver.common.keys import Keys
 
 import time, traceback, random, string
 
-main_url = "http://localhost:5000/"
+main_url = "http://hyper-honeypot.insane.us.to/"
 
 with app.app_context():
     ids = [exploit.id for exploit in Exploit.query.filter(Exploit.is_read == 0)]
