@@ -49,7 +49,7 @@ def check_otp():
         if not request.args.has_key('sign'):
             return u'Одноразовый пароль не подписан'
 
-        key = open("key.txt").read().strip()
+        key = open("key.txt").read().strip()[:32]
         otp = request.args['otp']
         sign = request.args['sign']
         if sha256(key + otp.decode('hex')).digest() != sign.decode('hex'):

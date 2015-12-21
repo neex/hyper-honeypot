@@ -16,7 +16,7 @@ with app.app_context():
 print ids
 
 with open("key.txt") as f:
-    key = f.read().strip()
+    key = f.read().strip()[:32]
 
 driver = webdriver.Firefox()
 driver.set_page_load_timeout(10)
