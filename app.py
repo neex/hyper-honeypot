@@ -45,7 +45,7 @@ def check_otp():
 
         if len(request.args.get('otp')) > 500:
             return u'Пароль слишком длинный'
-            
+
         if not request.args.has_key('sign'):
             return u'Пароль не подписан'
 

@@ -16,7 +16,7 @@ with app.app_context():
 print ids
 
 driver = webdriver.Firefox()
-
+driver.set_page_load_timeout(10)
 with open("key.txt") as f:
     key = f.read().strip()
 
@@ -29,7 +29,7 @@ for exp_id in ids:
         time.sleep(5)
         with app.app_context():
             exp = Exploit.query.filter_by(id=exp_id).first()
-#            exp.is_read = True
+            exp.is_read = True
             db.session.add(exp)
             db.session.commit()
     except:
