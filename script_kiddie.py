@@ -15,14 +15,14 @@ with app.app_context():
 
 print ids
 
-driver = webdriver.Firefox()
-driver.set_page_load_timeout(10)
 with open("key.txt") as f:
     key = f.read().strip()
 
 for exp_id in ids:
     print exp_id
     try:
+        driver = webdriver.Firefox()
+        driver.set_page_load_timeout(10)
         otp = ''.join(random.choice(string.ascii_letters) for i in xrange(30))
         sign = sha256(key + otp).digest()
         driver.get(main_url + "viewexploit/{}/?otp={}&sign={}".format(exp_id, otp.encode('hex'), sign.encode('hex')))
@@ -32,8 +32,6 @@ for exp_id in ids:
             exp.is_read = True
             db.session.add(exp)
             db.session.commit()
+        driver.close()
     except:
         traceback.print_exc()
-
-
-driver.close()
