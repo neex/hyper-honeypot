@@ -24,7 +24,7 @@ class OneTimePassword(db.Model):
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqldb://honeypot@localhost/honeypot?charset=utf8&use_unicode=0'
-app.debug = True
+app.debug = False
 db.init_app(app)
 
 @app.route('/', methods=['GET', 'POST'])
