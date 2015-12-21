@@ -6,8 +6,8 @@ while true; do
    sleep 5;
    DISPLAY=:10 python script_kiddie.py;
    kill -INT $pid;
-   sleep 60;
+   sleep 5;
    kill -KILL $pid;
-   sleep 30;
+   sleep 2;
    rm -rf /tmp/tmp*
 done
