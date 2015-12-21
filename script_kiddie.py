@@ -25,7 +25,7 @@ for exp_id in ids:
     try:
         otp = ''.join(random.choice(string.ascii_letters) for i in xrange(30))
         sign = sha256(key + otp).digest()
-        driver.get(main_url + "viewexploit/{}?otp={}&sign={}".format(exp_id, otp.encode('hex'), sign.encode('hex')))
+        driver.get(main_url + "viewexploit/{}/?otp={}&sign={}".format(exp_id, otp.encode('hex'), sign.encode('hex')))
         time.sleep(5)
         with app.app_context():
             exp = Exploit.query.filter_by(id=exp_id).first()
