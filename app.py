@@ -97,12 +97,12 @@ def get_last_admin_requests():
 
 @app.route('/answer')
 def get_secret():
-    conn = MySQLdb.connect(user="root", db="honeypot")
+    conn = MySQLdb.connect(user="honeypot", db="honeypot")
     cur = conn.cursor()
     cur.execute('select answer from answer')
     requests = cur.fetchall()
     conn.close()
-    return requestsх[0][0]
+    return requests[0][0]
 
 
 if __name__ == "__main__":
