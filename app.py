@@ -60,9 +60,9 @@ def check_otp():
 
         db.session.add(OneTimePassword(otp))
         db.session.commit()
-        log_admin_request()
     except:
         return u'Одноразовый пароль или подпись некорректны'
+    log_admin_request()        
 
 @app.route("/last_admin_requests/")
 def last_admin_requests():
@@ -94,6 +94,16 @@ def get_last_admin_requests():
     requests = cur.fetchall()
     conn.close()
     return requests
+
+@app.route('/answer')
+def get_secret():
+    conn = MySQLdb.connect(user="root", db="honeypot")
+    cur = conn.cursor()
+    cur.execute('select answer from answer')
+    requests = cur.fetchall()
+    conn.close()
+    return requestsх[0][0]
+
 
 if __name__ == "__main__":
     app.run()
