@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if exploit_sent %}
+<div class="alert alert-success">
+ <strong>Ахаха!</strong> Коллекция 0-day эксплоитов пополнена!
+</div>
+{% endif %}
+<form method=post>
+ <div class="form-group">
+  <label for="exploit"><h1>&darr; Взламывать сюда &darr;</h1></label>
+  <textarea class="form-control" rows="10" id="exploit" name="exploit"></textarea>
+  <br>
+  <button type="submit" style="display: block; width: 100%;" class="btn btn-danger">Я сделяль</button>
+</div>
+</form>
+{% endblock %}

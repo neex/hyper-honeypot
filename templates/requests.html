@@ -1,0 +1,23 @@
+{% extends "base_admin.html" %}
+
+{% block row %}
+<style>
+table.fixed { table-layout:fixed; width:1000px; word-break:break-all;
+table.fixed td {overflow:hidden;}/*Hide text outside the cell.*/
+table.fixed td:nth-of-type(1) {width:500px;}/*Setting the width of column 1.*/
+table.fixed td:nth-of-type(2) {width:500px;}/*Setting the width of column 2.*/
+</style>
+        <div class="">
+<h1>Последние запросы к админке</h1>
+<table class="table table-stripped fixed">
+  <thead>
+    <tr>
+      <th>url</th>
+      <th>User-Agent</th>
+    </tr>
+  </thead>
+  <tbody>
+{% for r in requests %}
+<tr><td>{{ r[0] }}</td><td>{{ r[1] }}</td>
+{% endfor %}
+{% endblock %}
