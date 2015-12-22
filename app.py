@@ -99,7 +99,7 @@ def get_last_admin_requests():
 
 @app.route('/answer')
 def get_secret():
-    return render_template('error.html', error=u'Всё не так просто...')
+    return render_template('error.html', error=u'Все не так просто. Эта функция отключена (даже у админов)')
 
 
 if __name__ == "__main__":
