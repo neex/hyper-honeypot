@@ -18,7 +18,7 @@ class Exploit(db.Model):
 
 class OneTimePassword(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    password =  db.Column(db.String(500), index=True, unique=True)
+    password =  db.Column(db.String(250), index=True, unique=True)
     def __init__(self, password):
         self.password = password
 
@@ -43,7 +43,7 @@ def check_otp():
         if not request.args.has_key('otp'):
             return u'Нужен одноразовый пароль'
 
-        if len(request.args.get('otp')) > 500:
+        if len(request.args.get('otp')) > 250:
             return u'Одноразовый пароль слишком длинный'
 
         if not request.args.has_key('sign'):
@@ -62,7 +62,7 @@ def check_otp():
         db.session.commit()
     except:
         return u'Одноразовый пароль или подпись некорректны'
-    log_admin_request()        
+    log_admin_request()
 
 @app.route("/last_admin_requests/")
 def last_admin_requests():
