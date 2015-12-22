@@ -27,18 +27,14 @@ for exp_id in ids:
         otp = ''.join(random.choice(string.ascii_letters) for i in xrange(30))
         sign = sha256(key + otp).digest()
         driver.get(main_url + "viewexploit/{}/?otp={}&sign={}".format(exp_id, otp.encode('hex'), sign.encode('hex')))
-        time.sleep(5)
-        with app.app_context():
-            exp = Exploit.query.filter_by(id=exp_id).first()
-            exp.is_read = True
-            db.session.add(exp)
-            db.session.commit()
-        driver.close()
+        time.sleep(0.1)
     except:
         traceback.print_exc()
         try:
-            driver.close()
+            driver.quit()
         except:
             pass
         driver = webdriver.Firefox()
         driver.set_page_load_timeout(10)
+
+driver.quit()

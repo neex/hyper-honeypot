@@ -78,6 +78,8 @@ def viewexploit(id):
     if error:
         return render_template('error.html', error=error)
     exploit = Exploit.query.filter_by(id=id).first_or_404()
+    exploit.is_read = True
+    db.session.commit()
     return render_template("exploit.html", exploit=exploit)
 
 def log_admin_request():
